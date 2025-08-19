@@ -1,0 +1,37 @@
+version: '1.0'
+
+services:
+  postgres:
+    container_name: postgres-oftalm
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=adm123
+      - POSTGRES_DB=apioftalm
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  api:
+    container_name: api-oftalm
+    image: api-oftalm
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=adm123
+      - POSTGRES_DB=apioftalm
+      - TYPE=postgres
+      - UPLOAD_HOST=http://localhost
+      - UPLOAD_PORT=8080
+
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+volumes:
+  pgdata:

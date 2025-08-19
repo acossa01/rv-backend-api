@@ -1,0 +1,611 @@
+c[[90m14:10:50[0m] Starting compilation in watch mode...
+
+[[90m14:11:44[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +491ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:29   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +1ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: CREATE TABLE "typeorm_metadata" ("type" character varying NOT NULL, "database" character varying, "schema" character varying, "table" character varying, "name" character varying, "value" text)
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: CREATE TYPE "public"."users_tipousuario_enum" AS ENUM('USUARIO_COMUM', 'MEDICO', 'ESTUDANTE')
+query: CREATE TYPE "public"."users_status_enum" AS ENUM('ATIVO', 'INATIVO')
+query: CREATE TYPE "public"."users_nivelvr_enum" AS ENUM('INICIANTE', 'INTERMEDIARIO', 'AVANCADO')
+query: CREATE TYPE "public"."users_usertype_enum" AS ENUM('USUARIO_COMUM', 'MEDICO', 'ESTUDANTE')
+query: CREATE TABLE "users" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "nomeCompleto" character varying(200) NOT NULL, "email" character varying(100) NOT NULL, "senha" character varying NOT NULL, "tipoUsuario" "public"."users_tipousuario_enum" NOT NULL, "status" "public"."users_status_enum" NOT NULL DEFAULT 'ATIVO', "dataCriacao" TIMESTAMP NOT NULL DEFAULT now(), "dataAtualizacao" TIMESTAMP NOT NULL DEFAULT now(), "telefone" character varying(20), "celular" character varying(20), "dataUltimoAcesso" date, "historicoMedico" text, "alergias" text, "medicamentosUso" text, "endereco" character varying(100), "cidade" character varying(50), "uf" character varying(2), "cep" character varying(10), "totalConteudosVisualizados" integer DEFAULT '0', "ultimoConteudoVisualizado" TIMESTAMP, "matricula" character varying(20), "instituicaoEnsino" character varying(200), "curso" character varying(100), "periodo" integer, "anoIngresso" integer DEFAULT '2024', "previsaoConclusao" date, "areasInteresse" text, "notaMedia" numeric(3,2) DEFAULT '0', "horasEstudoCompletadas" integer DEFAULT '0', "simulacoesRealizadas" integer DEFAULT '0', "casosClinicosEstudados" integer DEFAULT '0', "nivelVR" "public"."users_nivelvr_enum" DEFAULT 'INICIANTE', "orientadorId" uuid, "ultimaSimulacao" TIMESTAMP, "ultimoCasoClinico" TIMESTAMP, "crm" character varying(20), "ufCrm" character varying(2), "especialidades" text, "anosExperiencia" integer DEFAULT '0', "instituicao" character varying(200), "biografia" text, "enderecoConsultorio" character varying(100), "cidadeConsultorio" character varying(50), "ufConsultorio" character varying(2), "podeCriarConteudo" boolean DEFAULT false, "ehProfessor" boolean DEFAULT false, "totalConteudosCriados" integer DEFAULT '0', "totalEstudantesOrientados" integer DEFAULT '0', "userType" "public"."users_usertype_enum" NOT NULL, CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"), CONSTRAINT "UQ_62af96c4848f38864ef5b0db400" UNIQUE ("crm"), CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))
+query: CREATE INDEX "IDX_82bbcdb9c42c5fe140291785c1" ON "users" ("userType") 
+query: CREATE TABLE "blacklisted_tokens" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "token" text NOT NULL, "expiresAt" TIMESTAMP NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_8fb1bc7333c3b9f249f9feaa55d" PRIMARY KEY ("id"))
+query: CREATE UNIQUE INDEX "IDX_2b8c5de96ce5460b558e94f150" ON "blacklisted_tokens" ("token") 
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: CREATE TYPE "public"."conteudo_educacional_tipoconteudo_enum" AS ENUM('GERAL', 'APRENDIZADO_CLINICO', 'CIRURGIA')
+query: CREATE TYPE "public"."conteudo_educacional_niveldificuldade_enum" AS ENUM('BASICO', 'INTERMEDIARIO', 'AVANCADO', 'ESPECIALISTA')
+query: CREATE TYPE "public"."conteudo_educacional_status_enum" AS ENUM('ATIVO', 'INATIVO')
+query: CREATE TABLE "conteudo_educacional" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "titulo" character varying(200) NOT NULL, "descricao" text NOT NULL, "tipoConteudo" "public"."conteudo_educacional_tipoconteudo_enum" NOT NULL, "conteudoDetalhado" text, "urlModeloVR" character varying(500), "urlTextura" character varying(500), "tagsVR" text, "nivelDificuldade" "public"."conteudo_educacional_niveldificuldade_enum" NOT NULL DEFAULT 'BASICO', "duracaoEstimadaMinutos" integer NOT NULL DEFAULT '0', "dadosEspecificos" json, "versao" character varying(20) NOT NULL DEFAULT '1.0.0', "status" "public"."conteudo_educacional_status_enum" NOT NULL DEFAULT 'ATIVO', "totalVisualizacoes" integer NOT NULL DEFAULT '0', "avaliacaoMedia" numeric(3,2) NOT NULL DEFAULT '0', "totalAvaliacoes" integer NOT NULL DEFAULT '0', "autorMedicoId" uuid, "dataCriacao" TIMESTAMP NOT NULL DEFAULT now(), "dataAtualizacao" TIMESTAMP NOT NULL DEFAULT now(), "dataPublicacao" TIMESTAMP, CONSTRAINT "PK_ee26b24d1ab011b08f7490cf533" PRIMARY KEY ("id"))
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: CREATE TYPE "public"."sessoes_vr_status_enum" AS ENUM('AGENDADA', 'EM_ANDAMENTO', 'PAUSADA', 'FINALIZADA', 'CANCELADA')
+query: CREATE TABLE "sessoes_vr" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "titulo" character varying(200) NOT NULL, "descricao" text, "status" "public"."sessoes_vr_status_enum" NOT NULL DEFAULT 'AGENDADA', "dataInicio" TIMESTAMP NOT NULL, "dataFim" TIMESTAMP, "duracaoMinutos" integer, "ehPrivada" boolean NOT NULL DEFAULT false, "maxParticipantes" integer NOT NULL DEFAULT '1', "configuracaoVR" json, "cenarioVR" character varying(500), "salaId" uuid NOT NULL, "criadorId" uuid NOT NULL, "orientadorId" uuid, "progressoSessao" json, "avaliacaoMedia" numeric(3,2) NOT NULL DEFAULT '0', "dataCriacao" TIMESTAMP NOT NULL DEFAULT now(), "dataAtualizacao" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_236bb86548423dd57885ebddbdb" PRIMARY KEY ("id"))
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "n"."nspname", "t"."typname" FROM "pg_type" "t" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: CREATE TYPE "public"."salas_vr_tiposala_enum" AS ENUM('COMUM', 'TECNICA', 'CIRURGIA')
+query: CREATE TYPE "public"."salas_vr_statussala_enum" AS ENUM('DISPONIVEL', 'EM_USO', 'MANUTENCAO')
+query: CREATE TABLE "salas_vr" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "nome" character varying(100) NOT NULL, "descricao" text, "tipoSala" "public"."salas_vr_tiposala_enum" NOT NULL, "statusSala" "public"."salas_vr_statussala_enum" NOT NULL DEFAULT 'DISPONIVEL', "capacidadeMaxima" integer NOT NULL DEFAULT '1', "permiteMultiusuarios" boolean NOT NULL DEFAULT true, "requerOrientador" boolean NOT NULL DEFAULT false, "ambienteVR" character varying(500), "equipamentosDisponiveis" text, "ferramentasVR" text, "rolesPermitidos" text NOT NULL, "permiteInstrucaoIndividual" boolean NOT NULL DEFAULT false, "funcionaIndependente" boolean NOT NULL DEFAULT true, "totalSessoes" integer NOT NULL DEFAULT '0', "totalHorasUso" integer NOT NULL DEFAULT '0', "dataCriacao" TIMESTAMP NOT NULL DEFAULT now(), "dataAtualizacao" TIMESTAMP NOT NULL DEFAULT now(), "ultimaManutencao" TIMESTAMP, CONSTRAINT "PK_a1f2b77527d73d2d86b1ca6fa91" PRIMARY KEY ("id"))
+query: CREATE TABLE "participantes_sessao" ("sessaoId" uuid NOT NULL, "participanteId" uuid NOT NULL, CONSTRAINT "PK_ab4f50538b0d6212eca14b8a6d9" PRIMARY KEY ("sessaoId", "participanteId"))
+query: CREATE INDEX "IDX_5d119cecdc9bf4c1909ca12429" ON "participantes_sessao" ("sessaoId") 
+query: CREATE INDEX "IDX_b35393b930c013ee28e63afac8" ON "participantes_sessao" ("participanteId") 
+query: ALTER TABLE "users" ADD CONSTRAINT "FK_4511bf3b29fe653a779bb46231d" FOREIGN KEY ("orientadorId") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+query: ALTER TABLE "conteudo_educacional" ADD CONSTRAINT "FK_d8fa85c24e2ecde77cf2311b28b" FOREIGN KEY ("autorMedicoId") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+query: ALTER TABLE "sessoes_vr" ADD CONSTRAINT "FK_9e239c2d72925f1bc932c68d878" FOREIGN KEY ("salaId") REFERENCES "salas_vr"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+query: ALTER TABLE "sessoes_vr" ADD CONSTRAINT "FK_9bf5b1505454431760f358729bc" FOREIGN KEY ("criadorId") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+query: ALTER TABLE "sessoes_vr" ADD CONSTRAINT "FK_da586e13e124731f32ec6d20113" FOREIGN KEY ("orientadorId") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+query: ALTER TABLE "participantes_sessao" ADD CONSTRAINT "FK_5d119cecdc9bf4c1909ca124298" FOREIGN KEY ("sessaoId") REFERENCES "sessoes_vr"("id") ON DELETE CASCADE ON UPDATE CASCADE
+query: ALTER TABLE "participantes_sessao" ADD CONSTRAINT "FK_b35393b930c013ee28e63afac83" FOREIGN KEY ("participanteId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE
+query: COMMIT
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +4946ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +112ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +7ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 23765   - [39m14/08/2025, 14:12:34   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +1ms[39m
+/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15
+        throw new undefined_type_error_1.UndefinedTypeError(lodash_1.get(prototype, 'constructor.name'), propertyKey, index);
+              ^
+
+UndefinedTypeError: Undefined type error. Make sure you are providing an explicit type for the "criarConteudo" (parameter at index [0]) of the "ConteudoEducacionalResolver" class.
+    at Object.reflectTypeFromMetadata (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15:15)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/decorators/args.decorator.js:17:78
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:44
+    at Array.forEach (<anonymous>)
+    at LazyMetadataStorageHost.load (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:26)
+    at GraphQLSchemaFactory.<anonymous> (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/graphql-schema.factory.js:37:57)
+    at Generator.next (<anonymous>)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:117:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:113:16)
+
+Node.js v20.19.2
+c[[90m14:16:40[0m] File change detected. Starting incremental compilation...
+
+[[90m14:16:42[0m] Found 0 errors. Watching for file changes.
+
+c[[90m14:16:46[0m] File change detected. Starting incremental compilation...
+
+[[90m14:16:47[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:55   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +708ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:56   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +1ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'participantes_sessao')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='tipoUsuario'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='nivelVR'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='userType'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='tipoConteudo'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='nivelDificuldade'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='tipoSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='statusSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'sessoes_vr' AND "column_name"='status'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: COMMIT
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +1276ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +13ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +12ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 25060   - [39m14/08/2025, 14:16:57   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +1ms[39m
+/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15
+        throw new undefined_type_error_1.UndefinedTypeError(lodash_1.get(prototype, 'constructor.name'), propertyKey, index);
+              ^
+
+UndefinedTypeError: Undefined type error. Make sure you are providing an explicit type for the "criarConteudo" (parameter at index [0]) of the "ConteudoEducacionalResolver" class.
+    at Object.reflectTypeFromMetadata (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15:15)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/decorators/args.decorator.js:17:78
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:44
+    at Array.forEach (<anonymous>)
+    at LazyMetadataStorageHost.load (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:26)
+    at GraphQLSchemaFactory.<anonymous> (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/graphql-schema.factory.js:37:57)
+    at Generator.next (<anonymous>)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:117:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:113:16)
+
+Node.js v20.19.2
+c[[90m14:17:04[0m] File change detected. Starting incremental compilation...
+
+[[90m14:17:04[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:07   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +472ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +1ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'participantes_sessao')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='tipoUsuario'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='nivelVR'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='userType'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='tipoConteudo'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='nivelDificuldade'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='tipoSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='statusSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'sessoes_vr' AND "column_name"='status'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: COMMIT
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +600ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +10ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 25199   - [39m14/08/2025, 14:17:08   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +1ms[39m
+/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15
+        throw new undefined_type_error_1.UndefinedTypeError(lodash_1.get(prototype, 'constructor.name'), propertyKey, index);
+              ^
+
+UndefinedTypeError: Undefined type error. Make sure you are providing an explicit type for the "criarSessao" (parameter at index [0]) of the "SalasVRResolver" class.
+    at Object.reflectTypeFromMetadata (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15:15)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/decorators/args.decorator.js:17:78
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:44
+    at Array.forEach (<anonymous>)
+    at LazyMetadataStorageHost.load (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:26)
+    at GraphQLSchemaFactory.<anonymous> (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/graphql-schema.factory.js:37:57)
+    at Generator.next (<anonymous>)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:117:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:113:16)
+
+Node.js v20.19.2
+c[[90m14:17:44[0m] File change detected. Starting incremental compilation...
+
+[[90m14:17:45[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +469ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +8ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +11ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:48   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +1ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'participantes_sessao')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='tipoUsuario'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='nivelVR'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='userType'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='tipoConteudo'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='nivelDificuldade'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='tipoSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='statusSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'sessoes_vr' AND "column_name"='status'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: COMMIT
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +892ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +14ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +9ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 25410   - [39m14/08/2025, 14:17:49   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +7ms[39m
+/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15
+        throw new undefined_type_error_1.UndefinedTypeError(lodash_1.get(prototype, 'constructor.name'), propertyKey, index);
+              ^
+
+UndefinedTypeError: Undefined type error. Make sure you are providing an explicit type for the "criarSessao" (parameter at index [0]) of the "SalasVRResolver" class.
+    at Object.reflectTypeFromMetadata (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15:15)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/decorators/args.decorator.js:17:78
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:44
+    at Array.forEach (<anonymous>)
+    at LazyMetadataStorageHost.load (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:26)
+    at GraphQLSchemaFactory.<anonymous> (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/graphql-schema.factory.js:37:57)
+    at Generator.next (<anonymous>)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:117:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:113:16)
+
+Node.js v20.19.2
+c[[90m14:18:54[0m] File change detected. Starting incremental compilation...
+
+[[90m14:18:55[0m] Found 0 errors. Watching for file changes.
+
+c[[90m14:19:00[0m] File change detected. Starting incremental compilation...
+
+[[90m14:19:01[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:04   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +402ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:05   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +6ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'participantes_sessao')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='tipoUsuario'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='nivelVR'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='userType'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='tipoConteudo'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='nivelDificuldade'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='tipoSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='statusSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'sessoes_vr' AND "column_name"='status'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: COMMIT
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +1292ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +39ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +9ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +28ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +58ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +18ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 25782   - [39m14/08/2025, 14:19:06   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +10ms[39m
+/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15
+        throw new undefined_type_error_1.UndefinedTypeError(lodash_1.get(prototype, 'constructor.name'), propertyKey, index);
+              ^
+
+UndefinedTypeError: Undefined type error. Make sure you are providing an explicit type for the "criarSessao" (parameter at index [0]) of the "SalasVRResolver" class.
+    at Object.reflectTypeFromMetadata (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15:15)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/decorators/args.decorator.js:17:78
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:44
+    at Array.forEach (<anonymous>)
+    at LazyMetadataStorageHost.load (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:26)
+    at GraphQLSchemaFactory.<anonymous> (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/graphql-schema.factory.js:37:57)
+    at Generator.next (<anonymous>)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:117:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:113:16)
+
+Node.js v20.19.2
+c[[90m14:19:49[0m] File change detected. Starting incremental compilation...
+
+[[90m14:19:49[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:51   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +321ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +1ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'participantes_sessao')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='tipoUsuario'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='nivelVR'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='userType'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='tipoConteudo'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='nivelDificuldade'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='tipoSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='statusSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'sessoes_vr' AND "column_name"='status'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: COMMIT
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +845ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +10ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +6ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:53   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 25984   - [39m14/08/2025, 14:19:54   [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1824ms[39m
+[95m[Nest] 25984   - [39m14/08/2025, 14:19:54   [95m[PORT]: 3000[39m[38;5;3m +7ms[39m
+[95m[Nest] 25984   - [39m14/08/2025, 14:19:54   [95m[Environment] development[39m[38;5;3m +0ms[39m
+[95m[Nest] 25984   - [39m14/08/2025, 14:19:54   [95m[SERVER AT]: http://localhost:3000/graphql[39m[38;5;3m +1ms[39m
+node:events:502
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at ExpressAdapter.listen (/home/thiago/realidadevirtual/node_modules/@nestjs/platform-express/adapters/express-adapter.js:45:32)
+    at NestApplication.listen (/home/thiago/realidadevirtual/node_modules/@nestjs/core/nest-application.js:149:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async bootstrap (/home/thiago/realidadevirtual/dist/main.js:47:5)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v20.19.2
+ject.reflectTypeFromMetadata (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/utils/reflection.utilts.js:15:15)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/decorators/args.decorator.js:17:78
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:44
+    at Array.forEach (<anonymous>)
+    at LazyMetadataStorageHost.load (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/storages/lazy-metadata.storage.js:36:26)
+    at GraphQLSchemaFactory.<anonymous> (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/dist/schema-builder/graphql-schema.factory.js:37:57)
+    at Generator.next (<anonymous>)
+    at /home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:117:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (/home/thiago/realidadevirtual/node_modules/@nestjs/graphql/node_modules/tslib/tslib.js:113:16)
+
+Node.js v20.19.2
+c[[90m14:19:49[0m] File change detected. Starting incremental compilation...
+
+[[90m14:19:49[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:51   [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +217ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mEmailModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mServeStaticModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mGraphQLSchemaBuilderModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mGraphQLModule dependencies initialized[39m[38;5;3m +1ms[39m
+query: SELECT * FROM current_schema()
+query: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+query: SHOW server_version;
+query: START TRANSACTION
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_schema()
+query: SELECT * FROM current_database()
+query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'blacklisted_tokens') OR ("table_schema" = 'public' AND "table_name" = 'users') OR ("table_schema" = 'public' AND "table_name" = 'conteudo_educacional') OR ("table_schema" = 'public' AND "table_name" = 'salas_vr') OR ("table_schema" = 'public' AND "table_name" = 'sessoes_vr') OR ("table_schema" = 'public' AND "table_name" = 'participantes_sessao')
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'participantes_sessao'))
+query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'blacklisted_tokens') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'users') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'conteudo_educacional') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'salas_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'sessoes_vr') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'participantes_sessao')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='tipoUsuario'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='nivelVR'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'users' AND "column_name"='userType'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='tipoConteudo'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='nivelDificuldade'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'conteudo_educacional' AND "column_name"='status'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='tipoSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'salas_vr' AND "column_name"='statusSala'
+query: SELECT "udt_schema", "udt_name" FROM "information_schema"."columns" WHERE "table_schema" = 'public' AND "table_name" = 'sessoes_vr' AND "column_name"='status'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_tipousuario_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_nivelvr_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'users_usertype_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_tipoconteudo_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_niveldificuldade_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'conteudo_educacional_status_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_tiposala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'salas_vr_statussala_enum'
+query: SELECT "e"."enumlabel" AS "value" FROM "pg_enum" "e" INNER JOIN "pg_type" "t" ON "t"."oid" = "e"."enumtypid" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "t"."typnamespace" WHERE "n"."nspname" = 'public' AND "t"."typname" = 'sessoes_vr_status_enum'
+query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+query: SELECT * FROM current_database()
+query: SELECT * FROM current_schema()
+query: SELECT "t".* FROM "typeorm_metadata" "t" INNER JOIN "pg_catalog"."pg_class" "c" ON "c"."relname" = "t"."name" INNER JOIN "pg_namespace" "n" ON "n"."oid" = "c"."relnamespace" AND "n"."nspname" = "t"."schema" WHERE "t"."type" IN ('VIEW', 'MATERIALIZED_VIEW') AND (1=1)
+query: COMMIT
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +710ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mBlacklistModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mVrIntegrationModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mUsuariosModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mConteudoEducacionalModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mSalasVRModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[RoutesResolver] [39m[32mAppController {/assets}:[39m[38;5;3m +11ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[RouterExplorer] [39m[32mMapped {/assets/*, GET} route[39m[38;5;3m +6ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[RoutesResolver] [39m[32mVrIntegrationController {/vr}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:52   [38;5;3m[RouterExplorer] [39m[32mMapped {/vr/contents, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 25992   - [39m14/08/2025, 14:19:54   [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1999ms[39m
+[95m[Nest] 25992   - [39m14/08/2025, 14:19:54   [95m[PORT]: 3000[39m[38;5;3m +3ms[39m
+[95m[Nest] 25992   - [39m14/08/2025, 14:19:54   [95m[Environment] development[39m[38;5;3m +4ms[39m
+[95m[Nest] 25992   - [39m14/08/2025, 14:19:54   [95m[SERVER AT]: http://localhost:3000/graphql[39m[38;5;3m +1ms[39m

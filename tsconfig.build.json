@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["arquivos","node_modules", "test", "dist", "**/*spec.ts"],
+  "watchOptions": {
+    "excludeDirectories": ["arquivos"]
+  }
+}

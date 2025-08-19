@@ -1,0 +1,37 @@
+server:
+  port: 3000
+  host: localhost
+  https: false
+
+db:
+  type: postgres
+  host: localhost
+  database: apioftalm
+  username: postgres
+  password: adm123
+  port: 5432
+  synchronize: true
+  migrationsRun: false
+  logging: true
+
+graphql:
+  playground: true
+  debug: true
+
+encrypt:
+  key: 'f820ac1707e117d69fdbd9acaa69d4bc3d027e88c3bad6ec595e0cb33859009d'
+  algorithm: 'aes-256-cbc'
+  ivLength: 16
+
+jwt:
+  secret: 'akpsmndiopn1on243n15432b5n32on43eio1wedj'
+  signOptions:
+    expiresIn: '7d'
+
+email:
+  host: localhost
+  port: 1025
+  secure: false
+  user: ""
+  pass: ""
+  from: 'no-reply@example.com'

@@ -1,0 +1,32 @@
+server:
+  host: api-oftalm.herokuapp.com
+  port: 443
+  https: false
+
+db:
+  type: postgres
+  host: ec2-54-227-246-76.compute-1.amazonaws.com
+  database: d7dsmnk8c4q9r0
+  username: sopmoqdrmvkxqu
+  password: 147884cc5a22d43749bae7e899d7f938252d1d5ba6467f4a5aea916514eee250
+  port: 5432
+  synchronize: true
+  migrationsRun: false
+  logging: true
+  ssl:
+    rejectUnauthorized: false
+
+graphql:
+  playground: true
+  degub: false
+
+encrypt:
+  key: 'f820ca1707e117d69fdbd9acaa69d4bc3d027e88c3bad6ec595e0cb33859009d'
+  algorithm: 'aes-256-cbc'
+  ivLength: 16
+
+jwt:
+  secret: '25rbno23jn4rj23nrfjeqwnro3rn45jt43n5on4jfwlsfewsqf867wsedfewrfgwer4'
+  signOptions:
+    expiresIn: '365d'
+  IgnoreExpiration: false
