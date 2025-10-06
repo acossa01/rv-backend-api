@@ -7,9 +7,8 @@ var TipoConteudo;
     TipoConteudo["GERAL"] = "GERAL";
     TipoConteudo["APRENDIZADO_CLINICO"] = "APRENDIZADO_CLINICO";
     TipoConteudo["CIRURGIA"] = "CIRURGIA";
-})(TipoConteudo = exports.TipoConteudo || (exports.TipoConteudo = {}));
+})(TipoConteudo || (exports.TipoConteudo = TipoConteudo = {}));
 (0, graphql_1.registerEnumType)(TipoConteudo, {
     name: 'TipoConteudo',
     description: 'Tipos de conteúdo educacional disponíveis na plataforma VR',
 });
-//# sourceMappingURL=conteudo-educacional.enum.js.map

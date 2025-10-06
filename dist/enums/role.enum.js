@@ -7,9 +7,8 @@ var Roles;
     Roles["USUARIO_COMUM"] = "USUARIO_COMUM";
     Roles["MEDICO"] = "MEDICO";
     Roles["ESTUDANTE"] = "ESTUDANTE";
-})(Roles = exports.Roles || (exports.Roles = {}));
+})(Roles || (exports.Roles = Roles = {}));
 (0, graphql_1.registerEnumType)(Roles, {
     name: 'UserRole',
     description: 'Tipos de usuários do sistema de realidade virtual para oftalmologia',
 });
-//# sourceMappingURL=role.enum.js.map

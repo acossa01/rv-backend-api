@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { JwtGuard } from '../../guards/jwt.guard';
 
 // Entidades dos usuários
 import { UserEntity } from '../usuarios/entities/user.entity';

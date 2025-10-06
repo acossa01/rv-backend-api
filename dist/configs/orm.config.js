@@ -2,21 +2,25 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = __importDefault(require("config"));
-const { type, host, port, database, password, username, synchronize, migrationsRun, logging, sslmode, ssl, } = config_1.default.get('db');
+// 1. Pega todas as configurações do banco de dados do arquivo .yml
+const dbConfig = config_1.default.get('db');
+// 2. Define a configuração SSL de forma clara e separada
+//    Prioriza a variável de ambiente, se não existir, usa o valor do arquivo .yml
+const useSsl = process.env.SSL === 'true' || dbConfig.ssl;
 exports.default = {
-    type: (_a = process.env.TYPE) !== null && _a !== void 0 ? _a : type,
-    host: (_b = process.env.POSTGRES_HOST) !== null && _b !== void 0 ? _b : host,
-    port: (_c = process.env.POSTGRES_PORT) !== null && _c !== void 0 ? _c : port,
-    database: (_d = process.env.POSTGRES_DB) !== null && _d !== void 0 ? _d : database,
-    password: (_e = process.env.POSTGRES_PASSWORD) !== null && _e !== void 0 ? _e : password,
-    username: (_f = process.env.POSTGRES_USER) !== null && _f !== void 0 ? _f : username,
-    synchronize,
-    migrationsRun,
-    logging,
-    ssl,
+    type: process.env.TYPE ?? dbConfig.type,
+    host: process.env.POSTGRES_HOST ?? dbConfig.host,
+    port: process.env.POSTGRES_PORT ?? dbConfig.port,
+    database: process.env.POSTGRES_DB ?? dbConfig.database,
+    password: process.env.POSTGRES_PASSWORD ?? dbConfig.password,
+    username: process.env.POSTGRES_USER ?? dbConfig.username,
+    synchronize: dbConfig.synchronize,
+    migrationsRun: dbConfig.migrationsRun,
+    logging: dbConfig.logging,
+    // 3. Usa a variável 'useSsl' para montar o objeto de configuração do SSL
+    ssl: useSsl ? { rejectUnauthorized: false } : false,
     entities: ['dist/modules/**/*.entity{.ts,.js}'],
     migrations: ['dist/db/migrations/*{.ts,.js}'],
     migrationsTableName: 'migrations_typeorm',
@@ -25,4 +29,3 @@ exports.default = {
         entitiesDir: 'src/modules/**/*.entity{.ts,.js}',
     },
 };
-//# sourceMappingURL=orm.config.js.map

@@ -11,7 +11,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { MedicoEntity } from 'src/modules/usuarios/entities/medico.entity';
+import { MedicoEntity } from '../../usuarios/entities/medico.entity';
 
 @Entity('conteudo_educacional')
 @ObjectType()

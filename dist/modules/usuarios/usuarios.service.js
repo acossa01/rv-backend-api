@@ -15,194 +15,274 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
+var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for (var i = decorators.length - 1; i >= 0; i--) {
+        var context = {};
+        for (var p in contextIn) context[p] = p === "access" ? {} : contextIn[p];
+        for (var p in contextIn.access) context.access[p] = contextIn.access[p];
+        context.addInitializer = function (f) { if (done) throw new TypeError("Cannot add initializers after decoration has completed"); extraInitializers.push(accept(f || null)); };
+        var result = (0, decorators[i])(kind === "accessor" ? { get: descriptor.get, set: descriptor.set } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.unshift(_);
         }
-    return t;
+        else if (_ = accept(result)) {
+            if (kind === "field") initializers.unshift(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+};
+var __runInitializers = (this && this.__runInitializers) || function (thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for (var i = 0; i < initializers.length; i++) {
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+var __setFunctionName = (this && this.__setFunctionName) || function (f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuariosService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
-const user_entity_1 = require("./entities/user.entity");
-const usuario_comum_entity_1 = require("./entities/usuario-comum.entity");
-const medico_entity_1 = require("./entities/medico.entity");
-const estudante_entity_1 = require("./entities/estudante.entity");
 const role_enum_1 = require("../../enums/role.enum");
 const status_entities_1 = require("../../enums/status.entities");
 const bcrypt = __importStar(require("bcrypt"));
-let UsuariosService = class UsuariosService {
-    constructor(userRepository, usuarioComumRepository, medicoRepository, estudanteRepository) {
-        this.userRepository = userRepository;
-        this.usuarioComumRepository = usuarioComumRepository;
-        this.medicoRepository = medicoRepository;
-        this.estudanteRepository = estudanteRepository;
-    }
-    async findByEmail(email) {
-        return this.userRepository.findOne({
-            where: { email, status: status_entities_1.Status.ACTIVE },
-        });
-    }
-    async findById(id) {
-        return this.userRepository.findOne({
-            where: { id, status: status_entities_1.Status.ACTIVE },
-        });
-    }
-    async criarUsuarioComum(dados) {
-        const existeEmail = await this.userRepository.findOne({
-            where: { email: dados.email },
-        });
-        if (existeEmail) {
-            throw new common_1.ConflictException('Email já está em uso');
+let UsuariosService = (() => {
+    let _classDecorators = [(0, common_1.Injectable)()];
+    let _classDescriptor;
+    let _classExtraInitializers = [];
+    let _classThis;
+    var UsuariosService = _classThis = class {
+        constructor(userRepository, usuarioComumRepository, medicoRepository, estudanteRepository) {
+            this.userRepository = userRepository;
+            this.usuarioComumRepository = usuarioComumRepository;
+            this.medicoRepository = medicoRepository;
+            this.estudanteRepository = estudanteRepository;
         }
-        const senhaHash = await bcrypt.hash(dados.senha, 10);
-        const novoUsuario = this.usuarioComumRepository.create(Object.assign(Object.assign({}, dados), { senha: senhaHash, tipoUsuario: role_enum_1.Roles.USUARIO_COMUM, status: status_entities_1.Status.ACTIVE }));
-        return this.usuarioComumRepository.save(novoUsuario);
-    }
-    async criarMedico(dados) {
-        const existeEmail = await this.userRepository.findOne({
-            where: { email: dados.email },
-        });
-        if (existeEmail) {
-            throw new common_1.ConflictException('Email já está em uso');
+        /**
+         * Encontrar usuário por email para autenticação
+         */
+        async findByEmail(email) {
+            return this.userRepository.findOne({
+                where: { email, status: status_entities_1.Status.ACTIVE },
+            });
         }
-        const existeCRM = await this.medicoRepository.findOne({
-            where: { crm: dados.crm },
-        });
-        if (existeCRM) {
-            throw new common_1.ConflictException('CRM já está cadastrado');
+        /**
+         * Encontrar usuário por ID
+         */
+        async findById(id) {
+            return this.userRepository.findOne({
+                where: { id, status: status_entities_1.Status.ACTIVE },
+            });
         }
-        const senhaHash = await bcrypt.hash(dados.senha, 10);
-        const novoMedico = this.medicoRepository.create(Object.assign(Object.assign({}, dados), { senha: senhaHash, tipoUsuario: role_enum_1.Roles.MEDICO, status: status_entities_1.Status.ACTIVE }));
-        return this.medicoRepository.save(novoMedico);
-    }
-    async criarEstudante(dados) {
-        const existeEmail = await this.userRepository.findOne({
-            where: { email: dados.email },
-        });
-        if (existeEmail) {
-            throw new common_1.ConflictException('Email já está em uso');
-        }
-        const existeMatricula = await this.estudanteRepository.findOne({
-            where: { matricula: dados.matricula },
-        });
-        if (existeMatricula) {
-            throw new common_1.ConflictException('Matrícula já está cadastrada');
-        }
-        const senhaHash = await bcrypt.hash(dados.senha, 10);
-        const novoEstudante = this.estudanteRepository.create(Object.assign(Object.assign({}, dados), { senha: senhaHash, tipoUsuario: role_enum_1.Roles.ESTUDANTE, status: status_entities_1.Status.ACTIVE }));
-        return this.estudanteRepository.save(novoEstudante);
-    }
-    async validarCredenciais(email, senha) {
-        const usuario = await this.findByEmail(email);
-        if (!usuario) {
-            return null;
-        }
-        const senhaValida = await bcrypt.compare(senha, usuario.senha);
-        if (!senhaValida) {
-            return null;
-        }
-        await this.atualizarUltimoAcesso(usuario.id);
-        const { senha: _ } = usuario, usuarioSemSenha = __rest(usuario, ["senha"]);
-        return usuarioSemSenha;
-    }
-    async obterPerfilCompleto(userId) {
-        const usuario = await this.findById(userId);
-        if (!usuario) {
-            throw new common_1.NotFoundException('Usuário não encontrado');
-        }
-        let perfilCompleto;
-        switch (usuario.tipoUsuario) {
-            case role_enum_1.Roles.USUARIO_COMUM:
-                perfilCompleto = await this.usuarioComumRepository.findOne({
-                    where: { id: userId },
-                });
-                break;
-            case role_enum_1.Roles.MEDICO:
-                perfilCompleto = await this.medicoRepository.findOne({
-                    where: { id: userId },
-                    relations: ['estudantesOrientados'],
-                });
-                break;
-            case role_enum_1.Roles.ESTUDANTE:
-                perfilCompleto = await this.estudanteRepository.findOne({
-                    where: { id: userId },
-                    relations: ['orientador'],
-                });
-                break;
-            default:
-                perfilCompleto = usuario;
-        }
-        if (!perfilCompleto) {
-            throw new common_1.NotFoundException('Perfil não encontrado');
-        }
-        return perfilCompleto;
-    }
-    async atualizarUltimoAcesso(userId) {
-        await this.userRepository.update(userId, {
-            dataUltimoAcesso: new Date(),
-        });
-    }
-    async alterarStatusUsuario(userId, novoStatus) {
-        const usuario = await this.findById(userId);
-        if (!usuario) {
-            throw new common_1.NotFoundException('Usuário não encontrado');
-        }
-        await this.userRepository.update(userId, { status: novoStatus });
-        return this.findById(userId);
-    }
-    async listarUsuariosPorTipo(tipo) {
-        return this.userRepository.find({
-            where: { tipoUsuario: tipo, status: status_entities_1.Status.ACTIVE },
-            order: { nomeCompleto: 'ASC' },
-        });
-    }
-    async buscarMedicosOrientadores() {
-        return this.medicoRepository.find({
-            where: {
+        /**
+         * Criar usuário comum
+         */
+        async criarUsuarioComum(dados) {
+            // Verificar se email já existe
+            const existeEmail = await this.userRepository.findOne({
+                where: { email: dados.email },
+            });
+            if (existeEmail) {
+                throw new common_1.ConflictException('Email já está em uso');
+            }
+            // Hash da senha
+            const senhaHash = await bcrypt.hash(dados.senha, 10);
+            const novoUsuario = this.usuarioComumRepository.create({
+                ...dados,
+                senha: senhaHash,
+                tipoUsuario: role_enum_1.Roles.USUARIO_COMUM,
                 status: status_entities_1.Status.ACTIVE,
-                ehProfessor: true,
-            },
-            order: { nomeCompleto: 'ASC' },
-        });
-    }
-};
-UsuariosService = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.UserEntity)),
-    __param(1, (0, typeorm_1.InjectRepository)(usuario_comum_entity_1.UsuarioComumEntity)),
-    __param(2, (0, typeorm_1.InjectRepository)(medico_entity_1.MedicoEntity)),
-    __param(3, (0, typeorm_1.InjectRepository)(estudante_entity_1.EstudanteEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository,
-        typeorm_2.Repository,
-        typeorm_2.Repository])
-], UsuariosService);
+            });
+            return this.usuarioComumRepository.save(novoUsuario);
+        }
+        /**
+         * Criar médico
+         */
+        async criarMedico(dados) {
+            // Verificar se email já existe
+            const existeEmail = await this.userRepository.findOne({
+                where: { email: dados.email },
+            });
+            if (existeEmail) {
+                throw new common_1.ConflictException('Email já está em uso');
+            }
+            // Verificar se CRM já existe
+            const existeCRM = await this.medicoRepository.findOne({
+                where: { crm: dados.crm },
+            });
+            if (existeCRM) {
+                throw new common_1.ConflictException('CRM já está cadastrado');
+            }
+            // Hash da senha
+            const senhaHash = await bcrypt.hash(dados.senha, 10);
+            const novoMedico = this.medicoRepository.create({
+                ...dados,
+                senha: senhaHash,
+                tipoUsuario: role_enum_1.Roles.MEDICO,
+                status: status_entities_1.Status.ACTIVE,
+            });
+            return this.medicoRepository.save(novoMedico);
+        }
+        /**
+         * Criar estudante
+         */
+        async criarEstudante(dados) {
+            // Verificar se email já existe
+            const existeEmail = await this.userRepository.findOne({
+                where: { email: dados.email },
+            });
+            if (existeEmail) {
+                throw new common_1.ConflictException('Email já está em uso');
+            }
+            // Verificar se matrícula já existe
+            const existeMatricula = await this.estudanteRepository.findOne({
+                where: { matricula: dados.matricula },
+            });
+            if (existeMatricula) {
+                throw new common_1.ConflictException('Matrícula já está cadastrada');
+            }
+            // Hash da senha
+            const senhaHash = await bcrypt.hash(dados.senha, 10);
+            const novoEstudante = this.estudanteRepository.create({
+                ...dados,
+                senha: senhaHash,
+                tipoUsuario: role_enum_1.Roles.ESTUDANTE,
+                status: status_entities_1.Status.ACTIVE,
+            });
+            return this.estudanteRepository.save(novoEstudante);
+        }
+        /**
+         * Validar credenciais do usuário
+         */
+        async validarCredenciais(email, senha) {
+            const usuario = await this.findByEmail(email);
+            if (!usuario) {
+                return null;
+            }
+            const senhaValida = await bcrypt.compare(senha, usuario.senha);
+            if (!senhaValida) {
+                return null;
+            }
+            // Atualizar último acesso
+            await this.atualizarUltimoAcesso(usuario.id);
+            // Retornar usuário sem a senha
+            const { senha: _, ...usuarioSemSenha } = usuario;
+            return usuarioSemSenha;
+        }
+        /**
+         * Obter perfil completo do usuário baseado no tipo
+         */
+        async obterPerfilCompleto(userId) {
+            const usuario = await this.findById(userId);
+            if (!usuario) {
+                throw new common_1.NotFoundException('Usuário não encontrado');
+            }
+            let perfilCompleto;
+            switch (usuario.tipoUsuario) {
+                case role_enum_1.Roles.USUARIO_COMUM:
+                    perfilCompleto = await this.usuarioComumRepository.findOne({
+                        where: { id: userId },
+                    });
+                    break;
+                case role_enum_1.Roles.MEDICO:
+                    perfilCompleto = await this.medicoRepository.findOne({
+                        where: { id: userId },
+                        relations: ['estudantesOrientados'],
+                    });
+                    break;
+                case role_enum_1.Roles.ESTUDANTE:
+                    perfilCompleto = await this.estudanteRepository.findOne({
+                        where: { id: userId },
+                        relations: ['orientador'],
+                    });
+                    break;
+                default:
+                    perfilCompleto = usuario;
+            }
+            if (!perfilCompleto) {
+                throw new common_1.NotFoundException('Perfil não encontrado');
+            }
+            return perfilCompleto;
+        }
+        /**
+         * Atualizar último acesso
+         */
+        async atualizarUltimoAcesso(userId) {
+            await this.userRepository.update(userId, {
+                dataUltimoAcesso: new Date(),
+            });
+        }
+        /**
+         * Alterar status do usuário
+         */
+        async alterarStatusUsuario(userId, novoStatus) {
+            const usuario = await this.findById(userId);
+            if (!usuario) {
+                throw new common_1.NotFoundException('Usuário não encontrado');
+            }
+            await this.userRepository.update(userId, { status: novoStatus });
+            return this.findById(userId);
+        }
+        /**
+         * Listar usuários por tipo
+         */
+        async listarUsuariosPorTipo(tipo) {
+            return this.userRepository.find({
+                where: { tipoUsuario: tipo, status: status_entities_1.Status.ACTIVE },
+                order: { nomeCompleto: 'ASC' },
+            });
+        }
+        /**
+         * Buscar médicos para orientação
+         */
+        async buscarMedicosOrientadores() {
+            return this.medicoRepository.find({
+                where: {
+                    status: status_entities_1.Status.ACTIVE,
+                    ehProfessor: true,
+                },
+                order: { nomeCompleto: 'ASC' },
+            });
+        }
+    };
+    __setFunctionName(_classThis, "UsuariosService");
+    (() => {
+        const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+        __esDecorate(null, _classDescriptor = { value: _classThis }, _classDecorators, { kind: "class", name: _classThis.name, metadata: _metadata }, null, _classExtraInitializers);
+        UsuariosService = _classThis = _classDescriptor.value;
+        if (_metadata) Object.defineProperty(_classThis, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
+        __runInitializers(_classThis, _classExtraInitializers);
+    })();
+    return UsuariosService = _classThis;
+})();
 exports.UsuariosService = UsuariosService;
-//# sourceMappingURL=usuarios.service.js.map

@@ -1,8 +1,7 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { BlacklistService } from 'src/modules/blacklist/blacklist.service';
-
+import { BlacklistService } from '../modules/blacklist/blacklist.service';
 @Injectable()
 export class JwtGuard extends AuthGuard('jwt') {
   constructor(private blacklist: BlacklistService) {

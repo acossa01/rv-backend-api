@@ -6,7 +6,7 @@ var Status;
 (function (Status) {
     Status["ACTIVE"] = "ATIVO";
     Status["INACTIVE"] = "INATIVO";
-})(Status = exports.Status || (exports.Status = {}));
+})(Status || (exports.Status = Status = {}));
 (0, graphql_1.registerEnumType)(Status, {
     name: 'Status',
 });
@@ -14,4 +14,3 @@ exports.StatusResolver = {
     ACTIVE: 'ATIVO',
     INACTIVE: 'INATIVO',
 };
-//# sourceMappingURL=status.entities.js.map

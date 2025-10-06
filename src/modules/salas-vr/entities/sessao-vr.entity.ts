@@ -10,8 +10,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { SalaVREntity } from './sala-vr.entity';
-import { UserEntity } from 'src/modules/usuarios/entities/user.entity';
-import { MedicoEntity } from 'src/modules/usuarios/entities/medico.entity';
+import { UserEntity } from '../../usuarios/entities/user.entity';
+import { MedicoEntity } from '../../usuarios/entities/medico.entity';
 
 @Entity('sessoes_vr')
 @ObjectType()

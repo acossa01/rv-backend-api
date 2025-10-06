@@ -7,13 +7,13 @@ var TipoSala;
     TipoSala["COMUM"] = "COMUM";
     TipoSala["TECNICA"] = "TECNICA";
     TipoSala["CIRURGIA"] = "CIRURGIA";
-})(TipoSala = exports.TipoSala || (exports.TipoSala = {}));
+})(TipoSala || (exports.TipoSala = TipoSala = {}));
 var StatusSala;
 (function (StatusSala) {
     StatusSala["DISPONIVEL"] = "DISPONIVEL";
     StatusSala["EM_USO"] = "EM_USO";
     StatusSala["MANUTENCAO"] = "MANUTENCAO";
-})(StatusSala = exports.StatusSala || (exports.StatusSala = {}));
+})(StatusSala || (exports.StatusSala = StatusSala = {}));
 (0, graphql_1.registerEnumType)(TipoSala, {
     name: 'TipoSala',
     description: 'Tipos de salas disponíveis na plataforma VR',
@@ -22,4 +22,3 @@ var StatusSala;
     name: 'StatusSala',
     description: 'Status das salas VR',
 });
-//# sourceMappingURL=tipo-sala.enum.js.map
