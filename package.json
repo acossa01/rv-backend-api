@@ -24,7 +24,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm:build": "tsc -p tsconfig.json",
-    "typeorm:run-migrations": "node ./node_modules/typeorm/cli.js --config dist/configs/orm.config.js migration:run",
+    "typeorm:run-migrations": "node ./node_modules/typeorm/cli.js -d dist/data-source.js migration:run",
     "typeorm": "npm run typeorm:build && npm run typeorm:run-migrations"
   },
   "dependencies": {

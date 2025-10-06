@@ -16,5 +16,5 @@
     "skipLibCheck": true
       },
   "exclude": ["node_modules", "dist"],
-  "include": ["src/**/*.ts", "src/configs/*.ts", "src/db/migrations/*.ts"]
+  "include": ["src/**/*.ts", "src/configs/*.ts", "src/db/migrations/*.ts", "src/data-source.ts"]
 }
