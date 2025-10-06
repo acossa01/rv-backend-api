@@ -3,10 +3,10 @@ import { UseGuards } from '@nestjs/common';
 import { ConteudoEducacionalService } from './conteudo-educacional.service';
 import { ConteudoEducacionalEntity } from './entities/conteudo-educacional.entity';
 import { TipoConteudo } from '../../enums/conteudo-educacional.enum';
-import { Auth } from 'src/decorators/auth.decorator';
-import { CurrentUser } from 'src/decorators/currentUser.decorator';
-import { Roles } from 'src/enums/role.enum';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { Auth } from '../../decorators/auth.decorator';
+import { CurrentUser } from '../../decorators/currentUser.decorator';
+import { Roles } from '../../enums/role.enum';
+import { JwtGuard } from '../../guards/jwt.guard';
 import { ConteudoEducacionalInput, AtualizarConteudoEducacionalInput } from './dto/conteudo-educacional.input';
 
 @Resolver(() => ConteudoEducacionalEntity)

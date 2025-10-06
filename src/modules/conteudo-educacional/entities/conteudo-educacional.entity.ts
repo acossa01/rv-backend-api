@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 // Linha corrigida
 import { TipoConteudo } from '../../../enums/conteudo-educacional.enum';
-import { Status } from 'src/enums/status.entities';
+import { Status } from '../../../enums/status.entities';
 import {
   Column,
   CreateDateColumn,

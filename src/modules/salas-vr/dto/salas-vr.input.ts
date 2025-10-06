@@ -1,5 +1,5 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
-import { TipoSala } from 'src/enums/tipo-sala.enum';
+import { TipoSala } from '../../../enums/tipo-sala.enum';
 
 @InputType()
 export class CriarSessaoVRInput {

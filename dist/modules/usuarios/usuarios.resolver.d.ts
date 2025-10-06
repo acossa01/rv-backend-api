@@ -3,7 +3,7 @@ import { UserEntity } from './entities/user.entity';
 import { UsuarioComumEntity } from './entities/usuario-comum.entity';
 import { MedicoEntity } from './entities/medico.entity';
 import { EstudanteEntity } from './entities/estudante.entity';
-import { Roles } from 'src/enums/role.enum';
+import { Roles } from '../../enums/role.enum';
 export declare class UsuariosResolver {
     private readonly usuariosService;
     constructor(usuariosService: UsuariosService);

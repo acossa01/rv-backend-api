@@ -1,6 +1,6 @@
 import { ArgsType, Field, InputType, ObjectType } from '@nestjs/graphql';
-import { Roles } from 'src/enums/role.enum';
-import { Status } from 'src/enums/status.entities';
+import { Roles } from '../../enums/role.enum';
+import { Status } from '../../enums/status.entities';
 
 @ObjectType()
 export class UsuarioResponse {

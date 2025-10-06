@@ -1,6 +1,6 @@
-import { Roles } from 'src/enums/role.enum';
+import { Roles } from '../enums/role.enum';
 import { AuthGuard } from '@nestjs/passport';
-import { RoleGuards } from 'src/guards/role.guard';
+import { RoleGuards } from '../guards/role.guard';
 import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common';
 
 export const Assets = (...roles: Roles[]) => {

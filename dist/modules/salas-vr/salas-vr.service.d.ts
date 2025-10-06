@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
 import { SalaVREntity } from './entities/sala-vr.entity';
 import { SessaoVREntity } from './entities/sessao-vr.entity';
-import { TipoSala } from 'src/enums/tipo-sala.enum';
-import { Roles } from 'src/enums/role.enum';
+import { TipoSala } from '../../enums/tipo-sala.enum';
+import { Roles } from '../../enums/role.enum';
 export declare class SalasVRService {
     private readonly salaRepository;
     private readonly sessaoRepository;

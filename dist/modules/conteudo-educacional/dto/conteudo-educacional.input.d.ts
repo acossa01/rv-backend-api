@@ -1,4 +1,4 @@
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
+import { TipoConteudo } from '../../../enums/conteudo-educacional.enum';
 export declare class ConteudoEducacionalInput {
     titulo: string;
     descricao: string;

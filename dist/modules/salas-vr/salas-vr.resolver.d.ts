@@ -1,7 +1,7 @@
 import { SalasVRService } from './salas-vr.service';
 import { SalaVREntity } from './entities/sala-vr.entity';
 import { SessaoVREntity } from './entities/sessao-vr.entity';
-import { TipoSala } from 'src/enums/tipo-sala.enum';
+import { TipoSala } from '../../enums/tipo-sala.enum';
 import { CriarSessaoVRInput, CriarSalaVRInput } from './dto/salas-vr.input';
 export declare class SalasVRResolver {
     private readonly salasVRService;

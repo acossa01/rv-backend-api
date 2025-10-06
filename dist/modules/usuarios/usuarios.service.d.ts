@@ -3,8 +3,8 @@ import { UserEntity } from './entities/user.entity';
 import { UsuarioComumEntity } from './entities/usuario-comum.entity';
 import { MedicoEntity } from './entities/medico.entity';
 import { EstudanteEntity } from './entities/estudante.entity';
-import { Roles } from 'src/enums/role.enum';
-import { Status } from 'src/enums/status.entities';
+import { Roles } from '../../enums/role.enum';
+import { Status } from '../../enums/status.entities';
 export declare class UsuariosService {
     private readonly userRepository;
     private readonly usuarioComumRepository;

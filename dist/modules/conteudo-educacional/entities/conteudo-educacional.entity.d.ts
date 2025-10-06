@@ -1,6 +1,6 @@
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
-import { Status } from 'src/enums/status.entities';
-import { MedicoEntity } from 'src/modules/usuarios/entities/medico.entity';
+import { TipoConteudo } from '../../../enums/conteudo-educacional.enum';
+import { Status } from '../../../enums/status.entities';
+import { MedicoEntity } from '../../usuarios/entities/medico.entity';
 export declare class ConteudoEducacionalEntity {
     id: string;
     titulo: string;

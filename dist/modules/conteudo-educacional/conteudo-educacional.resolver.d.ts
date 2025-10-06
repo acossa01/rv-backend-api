@@ -1,6 +1,6 @@
 import { ConteudoEducacionalService } from './conteudo-educacional.service';
 import { ConteudoEducacionalEntity } from './entities/conteudo-educacional.entity';
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
+import { TipoConteudo } from '../../enums/conteudo-educacional.enum';  
 import { ConteudoEducacionalInput, AtualizarConteudoEducacionalInput } from './dto/conteudo-educacional.input';
 export declare class ConteudoEducacionalResolver {
     private readonly conteudoService;

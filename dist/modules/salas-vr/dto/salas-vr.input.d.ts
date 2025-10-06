@@ -1,4 +1,4 @@
-import { TipoSala } from 'src/enums/tipo-sala.enum';
+import { TipoSala } from '../../../enums/tipo-sala.enum';
 export declare class CriarSessaoVRInput {
     salaId: string;
     orientadorId?: string;

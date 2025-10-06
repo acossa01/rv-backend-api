@@ -1,4 +1,4 @@
-import { TipoSala, StatusSala } from 'src/enums/tipo-sala.enum';
+import { TipoSala, StatusSala } from '../../../enums/tipo-sala.enum';
 import { SessaoVREntity } from './sessao-vr.entity';
 export declare class SalaVREntity {
     id: string;

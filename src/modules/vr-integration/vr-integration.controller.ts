@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ConteudoEducacionalService } from '../conteudo-educacional/conteudo-educacional.service';
-import { Roles } from 'src/enums/role.enum';
+import { Roles } from '../../enums/role.enum';
 
 @Controller('vr')
 export class VrIntegrationController {

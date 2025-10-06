@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ChildEntity, Column, OneToMany } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { Roles } from 'src/enums/role.enum';
+import { Roles } from '../../../enums/role.enum';
 import { EstudanteEntity } from './estudante.entity';
 
 @ChildEntity(Roles.MEDICO)

@@ -1,5 +1,5 @@
-import { Roles } from 'src/enums/role.enum';
-import { Status } from 'src/enums/status.entities';
+import { Roles } from '../../../enums/role.enum';
+import { Status } from '../../../enums/status.entities';
 export declare class UserEntity {
     id: string;
     nomeCompleto: string;

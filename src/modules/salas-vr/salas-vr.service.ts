@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { SalaVREntity } from './entities/sala-vr.entity';
 import { SessaoVREntity } from './entities/sessao-vr.entity';
-import { TipoSala, StatusSala } from 'src/enums/tipo-sala.enum';
-import { Roles } from 'src/enums/role.enum';
+import { TipoSala, StatusSala } from '../../enums/tipo-sala.enum';
+import { Roles } from '../../enums/role.enum';
 
 @Injectable()
 export class SalasVRService {

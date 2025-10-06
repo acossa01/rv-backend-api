@@ -3,11 +3,11 @@ import { UseGuards } from '@nestjs/common';
 import { SalasVRService } from './salas-vr.service';
 import { SalaVREntity } from './entities/sala-vr.entity';
 import { SessaoVREntity } from './entities/sessao-vr.entity';
-import { TipoSala } from 'src/enums/tipo-sala.enum';
-import { Auth } from 'src/decorators/auth.decorator';
-import { CurrentUser } from 'src/decorators/currentUser.decorator';
-import { Roles } from 'src/enums/role.enum';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { TipoSala } from '../../enums/tipo-sala.enum';
+import { Auth } from '../../decorators/auth.decorator';
+import { CurrentUser } from '../../decorators/currentUser.decorator';
+import { Roles } from '../../enums/role.enum';
+import { JwtGuard } from '../../guards/jwt.guard';
 import { CriarSessaoVRInput, CriarSalaVRInput } from './dto/salas-vr.input';
 
 @Resolver(() => SalaVREntity)

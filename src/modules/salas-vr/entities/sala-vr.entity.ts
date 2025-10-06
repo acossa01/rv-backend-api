@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { TipoSala, StatusSala } from 'src/enums/tipo-sala.enum';
+import { TipoSala, StatusSala } from '../../../enums/tipo-sala.enum';
 import {
   Column,
   CreateDateColumn,

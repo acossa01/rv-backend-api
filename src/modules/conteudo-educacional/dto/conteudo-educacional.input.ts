@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
+import { TipoConteudo } from '../../../enums/conteudo-educacional.enum';
 
 @InputType()
 export class ConteudoEducacionalInput {

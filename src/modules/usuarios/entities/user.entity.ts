@@ -1,7 +1,7 @@
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import config from 'config';
-import { Roles } from 'src/enums/role.enum';
-import { Status } from 'src/enums/status.entities';
+import { Roles } from '../../../enums/role.enum';
+import { Status } from '../../../enums/status.entities';
 import {
   Column,
   CreateDateColumn,

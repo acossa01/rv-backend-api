@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { ConteudoEducacionalEntity } from './entities/conteudo-educacional.entity';
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
-import { Roles } from 'src/enums/role.enum';
+import { TipoConteudo } from '../../enums/conteudo-educacional.enum';
+import { Roles } from '../../enums/role.enum';
 export declare class ConteudoEducacionalService {
     private readonly conteudoRepository;
     constructor(conteudoRepository: Repository<ConteudoEducacionalEntity>);

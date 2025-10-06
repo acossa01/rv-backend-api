@@ -1,5 +1,5 @@
 import { ConteudoEducacionalService } from '../conteudo-educacional/conteudo-educacional.service';
-import { Roles } from 'src/enums/role.enum';
+import { Roles } from '../../enums/role.enum';
 export declare class VrIntegrationController {
     private conteudoService;
     constructor(conteudoService: ConteudoEducacionalService);
