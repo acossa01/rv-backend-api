@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
+// Linha corrigida
+import { TipoConteudo } from '../../../enums/conteudo-educacional.enum';
 import { Status } from 'src/enums/status.entities';
 import {
   Column,

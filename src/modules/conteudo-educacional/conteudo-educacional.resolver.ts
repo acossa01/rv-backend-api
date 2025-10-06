@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { ConteudoEducacionalService } from './conteudo-educacional.service';
 import { ConteudoEducacionalEntity } from './entities/conteudo-educacional.entity';
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
+import { TipoConteudo } from '../../enums/conteudo-educacional.enum';
 import { Auth } from 'src/decorators/auth.decorator';
 import { CurrentUser } from 'src/decorators/currentUser.decorator';
 import { Roles } from 'src/enums/role.enum';

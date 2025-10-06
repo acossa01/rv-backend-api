@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConteudoEducacionalEntity } from './entities/conteudo-educacional.entity';
-import { TipoConteudo } from 'src/enums/conteudo-educacional.enum';
+import { TipoConteudo } from '../../enums/conteudo-educacional.enum';
 import { Roles } from 'src/enums/role.enum';
 import { Status } from 'src/enums/status.entities';
 
