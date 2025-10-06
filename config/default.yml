@@ -8,7 +8,7 @@ db:
   host: localhost
   database: apioftalm
   username: postgres
-  password: adm123
+  password: Mikhail01 
   port: 5432
   synchronize: true
   migrationsRun: false

@@ -10,12 +10,13 @@ async function bootstrap() {
   const HOST = config.get('server.host');
   const PROTOCOL = config.get('server.https') ? 'https' : 'http';
 
-  const app = await NestFactory.create(AppModule, {
+    const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: '*',
+      origin: process.env.FRONTEND_URL || "http://localhost:8080", // Defina a URL do seu frontend em produção
       credentials: true,
     },
   });
+
 
   app.use(bodyParser.json({ limit: '500mb' }));
   app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
