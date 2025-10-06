@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/main.ts"
+    }
+  ],
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "startCommand": "npm run start:heroku"
+}
