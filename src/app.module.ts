@@ -3,7 +3,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { resolve } from 'path';
-import { AppController } from './app.controller';
 import graphconfig from './configs/graphql.config';
 import ormconfig from './configs/orm.config';
 
