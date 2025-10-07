@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { resolve } from 'path';
 import graphconfig from './configs/graphql.config';
 import ormconfig from './configs/orm.config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
-// Novos módulos da aplicação VR
+// Módulos da aplicação
 import { AuthModule } from './modules/auth/auth.module';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { ConteudoEducacionalModule } from './modules/conteudo-educacional/conteudo-educacional.module';
@@ -18,7 +16,6 @@ import { VrIntegrationModule } from './modules/vr-integration/vr-integration.mod
 
 @Module({
   imports: [
-    // Módulos principais da aplicação VR de Oftalmologia
     UsuariosModule,
     AuthModule,
     ConteudoEducacionalModule,
@@ -26,23 +23,16 @@ import { VrIntegrationModule } from './modules/vr-integration/vr-integration.mod
     BlacklistModule,
     EmailModule,
     VrIntegrationModule,
-    
-    // Configurações do GraphQL e banco de dados
+
+    // Configuração do GraphQL atualizada
     GraphQLModule.forRoot<ApolloDriverConfig>({
-  driver: ApolloDriver,
-  ...graphconfig, // Mantém as suas configurações existentes
-}),
-    TypeOrmModule.forRoot(ormconfig),
-    
-    // Servir arquivos estáticos
-    ServeStaticModule.forRoot({
-      rootPath: resolve('/assets'),
-      exclude: ['/api*', '/graphql'],
-      serveRoot: '/assets',
-      serveStaticOptions: {
-        index: false,
-      },
+      driver: ApolloDriver,
+      ...graphconfig, // Mantém as suas configurações existentes
     }),
+
+    TypeOrmModule.forRoot(ormconfig),
   ],
+  controllers: [], // Vazio, pois removemos o AppController
+  providers: [],   // Vazio, pois removemos o AppService
 })
 export class AppModule {}
