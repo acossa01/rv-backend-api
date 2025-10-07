@@ -15,7 +15,7 @@ export default {
   database: process.env.POSTGRES_DB ?? dbConfig.database,
   password: process.env.POSTGRES_PASSWORD ?? dbConfig.password,
   username: process.env.POSTGRES_USER ?? dbConfig.username,
-  synchronize: dbConfig.synchronize,
+  synchronize: true,
   migrationsRun: dbConfig.migrationsRun,
   logging: dbConfig.logging,
   
