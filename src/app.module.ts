@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { resolve } from 'path';
 import graphconfig from './configs/graphql.config';
 import ormconfig from './configs/orm.config';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 // Novos módulos da aplicação VR
 import { AuthModule } from './modules/auth/auth.module';
@@ -27,7 +28,10 @@ import { VrIntegrationModule } from './modules/vr-integration/vr-integration.mod
     VrIntegrationModule,
     
     // Configurações do GraphQL e banco de dados
-    GraphQLModule.forRoot(graphconfig),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+  driver: ApolloDriver,
+  ...graphconfig, // Mantém as suas configurações existentes
+}),
     TypeOrmModule.forRoot(ormconfig),
     
     // Servir arquivos estáticos
