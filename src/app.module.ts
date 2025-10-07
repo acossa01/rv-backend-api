@@ -40,6 +40,5 @@ import { VrIntegrationModule } from './modules/vr-integration/vr-integration.mod
       },
     }),
   ],
-  controllers: [],
 })
 export class AppModule {}
