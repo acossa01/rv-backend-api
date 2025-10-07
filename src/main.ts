@@ -2,12 +2,12 @@ import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as bodyParser from 'body-parser';
+import { Logger } from '@nestjs/common';
 
-// Esta é a função que a Vercel irá chamar.
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: process.env.FRONTEND_URL || "http://localhost:8080",
+      origin: process.env.FRONTEND_URL || "http://localhost:8081",
       credentials: true,
     },
   });
@@ -15,13 +15,10 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '500mb' }));
   app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
 
-  // Prepara a aplicação, mas não a prende a uma porta.
-  await app.init(); 
+  // O Render fornece a porta através da variável de ambiente PORT
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
 
-  // Retorna a instância do servidor para a Vercel gerir.
-  const expressApp = app.getHttpAdapter().getInstance();
-  return expressApp;
+  Logger.log(`🚀 Aplicação a correr na porta ${port}`, 'Bootstrap');
 }
-
-// Exporta a função para a Vercel usar.
-export default bootstrap();
+bootstrap();
